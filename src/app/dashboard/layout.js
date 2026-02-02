@@ -15,11 +15,16 @@ export default async function DashboardLayout({ children }) {
     <div className="min-h-screen bg-neutral-50 flex flex-col">
       <header className="bg-white border-b border-neutral-200 print:hidden hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight">Swastik Plywood</h1>
+            <div className="flex items-center gap-4">
+              <div className="relative w-12 h-12 rounded-full border-2 border-black overflow-hidden bg-white">
+                <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold tracking-tight">Swastik Plywood</h1>
             <p className="text-xs text-neutral-600 mt-0.5">
               {user.email} • <span className="uppercase font-medium">{role}</span>
             </p>
+            </div>
           </div>
           
           <form action={logout}>

@@ -28,12 +28,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo Section */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="flex-shrink-0 flex items-center md:hidden">
             <div className="flex items-center gap-3">
-              <div className="md:hidden relative w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white">
+              <div className="relative w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white">
                 <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
               </div>
-              <span className="text-xl font-bold tracking-tight md:hidden">Swastik Ply</span>
+              <span className="text-xl font-bold tracking-tight">Swastik Ply</span>
             </div>
           </div>
 
