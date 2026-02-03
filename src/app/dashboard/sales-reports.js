@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { BarChart3 } from 'lucide-react'
+import { BarChart3, Calendar } from 'lucide-react'
 import { 
   getProductsByCompany, 
   getProductsByGrade, 
@@ -20,6 +20,56 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
   const [selectedProduct, setSelectedProduct] = useState('')
   const [salesData, setSalesData] = useState(null)
   const [loading, setLoading] = useState(false)
+  
+  // Date Filtering State
+  const [dateRange, setDateRange] = useState('this_month') // 'last_7_days', 'this_month', 'last_month', 'custom'
+  const [customStart, setCustomStart] = useState('')
+  const [customEnd, setCustomEnd] = useState('')
+
+  // Calculate start and end dates based on range
+  const getDateParams = () => {
+    const today = new Date()
+    let startDate = null
+    let endDate = null
+
+    if (dateRange === 'last_7_days') {
+      const start = new Date(today)
+      start.setDate(today.getDate() - 7)
+      startDate = start.toISOString().split('T')[0]
+      endDate = today.toISOString().split('T')[0]
+    } else if (dateRange === 'this_month') {
+      const start = new Date(today.getFullYear(), today.getMonth(), 1)
+      const end = new Date(today.getFullYear(), today.getMonth() + 1, 0)
+      startDate = start.toISOString().split('T')[0]
+      endDate = end.toISOString().split('T')[0]
+    } else if (dateRange === 'last_month') {
+      const start = new Date(today.getFullYear(), today.getMonth() - 1, 1)
+      const end = new Date(today.getFullYear(), today.getMonth(), 0)
+      startDate = start.toISOString().split('T')[0]
+      endDate = end.toISOString().split('T')[0]
+    } else if (dateRange === 'custom') {
+      startDate = customStart || null
+      endDate = customEnd || null
+    }
+
+    return { startDate, endDate }
+  }
+
+  // Refetch data when date range changes
+  useEffect(() => {
+    if (dateRange === 'custom' && (!customStart || !customEnd)) {
+      return // Don't fetch if custom range is incomplete
+    }
+    
+    // Trigger the appropriate reload based on current selection depth
+    if (selectedProduct) {
+      loadSalesForProduct()
+    } else if (selectedCategory) {
+      loadSalesForCategory()
+    } else if (selectedType) {
+      loadSalesForType()
+    }
+  }, [dateRange, customStart, customEnd])
 
   // Reset and load categories when type changes
   useEffect(() => {
@@ -78,19 +128,21 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
 
   async function loadSalesForType() {
     setLoading(true)
-    const result = await getSalesByType(selectedType)
+    const { startDate, endDate } = getDateParams()
+    const result = await getSalesByType(selectedType, startDate, endDate)
     setSalesData(result)
     setLoading(false)
   }
 
   async function loadSalesForCategory() {
     setLoading(true)
+    const { startDate, endDate } = getDateParams()
     let result
     
     if (selectedType === 'Plywood') {
-      result = await getSalesByCompany(selectedCategory)
+      result = await getSalesByCompany(selectedCategory, startDate, endDate)
     } else if (['Board', 'MDF', 'Flexi'].includes(selectedType)) {
-      result = await getSalesByBoardGrade(selectedCategory)
+      result = await getSalesByBoardGrade(selectedCategory, startDate, endDate)
     }
     
     setSalesData(result)
@@ -99,7 +151,8 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
 
   async function loadSalesForProduct() {
     setLoading(true)
-    const result = await getProductSales(selectedProduct)
+    const { startDate, endDate } = getDateParams()
+    const result = await getProductSales(selectedProduct, startDate, endDate)
     setSalesData(result)
     setLoading(false)
   }
@@ -139,14 +192,72 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
   return (
     <div className="bg-white border border-neutral-200 rounded-2xl p-6">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6 pb-4 border-b border-neutral-200">
-        <div className="bg-neutral-900 text-white p-2 rounded-lg">
-          <BarChart3 className="w-5 h-5" />
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-neutral-200 flex-wrap gap-4">
+        <div className="flex items-center gap-3">
+          <div className="bg-neutral-900 text-white p-2 rounded-lg">
+            <BarChart3 className="w-5 h-5" />
+          </div>
+          <h2 className="text-2xl font-bold">Sales Reports</h2>
         </div>
-        <h2 className="text-2xl font-bold">Sales Reports</h2>
+        
+        {/* Date Filters */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2 bg-neutral-100/50 p-1 rounded-lg border border-neutral-200">
+            <button
+              onClick={() => setDateRange('last_7_days')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                dateRange === 'last_7_days' ? 'bg-black/10 text-black font-semibold' : 'text-neutral-600 hover:text-black hover:bg-black/5'
+              }`}
+            >
+              Last 7 Days
+            </button>
+            <button
+              onClick={() => setDateRange('this_month')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                dateRange === 'this_month' ? 'bg-black/10 text-black font-semibold' : 'text-neutral-600 hover:text-black hover:bg-black/5'
+              }`}
+            >
+              This Month
+            </button>
+            <button
+              onClick={() => setDateRange('last_month')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                dateRange === 'last_month' ? 'bg-black/10 text-black font-semibold' : 'text-neutral-600 hover:text-black hover:bg-black/5'
+              }`}
+            >
+              Last Month
+            </button>
+            <button
+              onClick={() => setDateRange('custom')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                dateRange === 'custom' ? 'bg-black/10 text-black font-semibold' : 'text-neutral-600 hover:text-black hover:bg-black/5'
+              }`}
+            >
+              Custom
+            </button>
+          </div>
+
+          {dateRange === 'custom' && (
+            <div className="flex items-center gap-2 animate-in fade-in slide-in-from-right-4">
+              <input
+                type="date"
+                value={customStart}
+                onChange={(e) => setCustomStart(e.target.value)}
+                className="px-3 py-1.5 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black"
+              />
+              <span className="text-neutral-400">-</span>
+              <input
+                type="date"
+                value={customEnd}
+                onChange={(e) => setCustomEnd(e.target.value)}
+                className="px-3 py-1.5 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black"
+              />
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Filters */}
+      {/* Product Filters */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {/* Product Type Dropdown */}
         <div>
@@ -230,6 +341,18 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
                 <p className="text-4xl font-bold">₹{salesData.totalRevenue.toLocaleString('en-IN')}</p>
               </div>
             </div>
+            {/* Active Date Filter Label */}
+            <div className="mt-4 pt-4 border-t border-neutral-800 flex items-center gap-2 text-sm text-neutral-400">
+               <Calendar className="w-4 h-4" />
+               <span>
+                 Showing data for: <span className="text-white font-medium capitalize">{dateRange.replace(/_/g, ' ')}</span>
+                 {dateRange === 'custom' && customStart && customEnd && (
+                   <span className="bg-neutral-800 ml-2 px-2 py-0.5 rounded text-white text-xs">
+                     {new Date(customStart).toLocaleDateString()} - {new Date(customEnd).toLocaleDateString()}
+                   </span>
+                 )}
+               </span>
+            </div>
           </div>
 
           {/* Sales Details Table */}
@@ -278,6 +401,7 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
           {salesData.data && salesData.data.length === 0 && (
             <div className="p-12 text-center">
               <p className="text-lg font-medium text-neutral-600">No sales found for this product</p>
+              <p className="text-sm text-neutral-500 mt-1">Try changing the date range or product selection</p>
             </div>
           )}
         </div>
