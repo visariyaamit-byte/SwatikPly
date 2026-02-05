@@ -114,6 +114,28 @@ export async function getProductSales(inventoryId, startDate = null, endDate = n
     return { data: null, totalQuantity: 0, totalRevenue: 0, error: null }
   }
   
+  // If date filters are provided, first get challan IDs in date range
+  let challanIds = null
+  if (startDate || endDate) {
+    let challanQuery = supabase
+      .from('challans')
+      .select('id')
+    
+    if (startDate) {
+      challanQuery = challanQuery.gte('date', startDate)
+    }
+    if (endDate) {
+      challanQuery = challanQuery.lte('date', endDate)
+    }
+    
+    const { data: challans } = await challanQuery
+    challanIds = challans?.map(c => c.id) || []
+    
+    if (challanIds.length === 0) {
+      return { data: [], totalQuantity: 0, totalRevenue: 0, error: null }
+    }
+  }
+  
   let query = supabase
     .from('challan_items')
     .select(`
@@ -131,12 +153,9 @@ export async function getProductSales(inventoryId, startDate = null, endDate = n
     .eq('inventory_id', inventoryId)
     .order('challan(date)', { ascending: false })
   
-  // Apply date filters if provided
-  if (startDate) {
-    query = query.gte('challan.date', startDate)
-  }
-  if (endDate) {
-    query = query.lte('challan.date', endDate)
+  // Filter by challan IDs if date range was specified
+  if (challanIds) {
+    query = query.in('challan_id', challanIds)
   }
   
   const { data, error } = await query
@@ -153,7 +172,7 @@ export async function getProductSales(inventoryId, startDate = null, endDate = n
 }
 
 // Get aggregated sales by product type
-export async function getSalesByType(productType) {
+export async function getSalesByType(productType, startDate = null, endDate = null) {
   const supabase = await createClient()
   
   // Get all inventory IDs for this type
@@ -168,8 +187,31 @@ export async function getSalesByType(productType) {
   
   const inventoryIds = inventoryItems.map(item => item.id)
   
+  // If date filters are provided, first get challan IDs in date range
+  let challanIds = null
+  if (startDate || endDate) {
+    let challanQuery = supabase
+      .from('challans')
+      .select('id')
+    
+    if (startDate) {
+      challanQuery = challanQuery.gte('date', startDate)
+    }
+    if (endDate) {
+      challanQuery = challanQuery.lte('date', endDate)
+    }
+    
+    const { data: challans } = await challanQuery
+    challanIds = challans?.map(c => c.id) || []
+    
+    // If no challans in date range, return empty
+    if (challanIds.length === 0) {
+      return { data: [], totalQuantity: 0, totalRevenue: 0, error: null }
+    }
+  }
+  
   // Get all sales for these inventory items
-  const { data, error } = await supabase
+  let query = supabase
     .from('challan_items')
     .select(`
       id,
@@ -186,6 +228,13 @@ export async function getSalesByType(productType) {
     .in('inventory_id', inventoryIds)
     .order('challan(date)', { ascending: false })
   
+  // Filter by challan IDs if date range was specified
+  if (challanIds) {
+    query = query.in('challan_id', challanIds)
+  }
+  
+  const { data, error } = await query
+  
   if (error) {
     return { data: [], totalQuantity: 0, totalRevenue: 0, error: error.message }
   }
@@ -197,7 +246,7 @@ export async function getSalesByType(productType) {
 }
 
 // Get aggregated sales by company
-export async function getSalesByCompany(companyId) {
+export async function getSalesByCompany(companyId, startDate = null, endDate = null) {
   const supabase = await createClient()
   
   // Get all inventory IDs for this company
@@ -212,8 +261,30 @@ export async function getSalesByCompany(companyId) {
   
   const inventoryIds = inventoryItems.map(item => item.id)
   
+  // If date filters are provided, first get challan IDs in date range
+  let challanIds = null
+  if (startDate || endDate) {
+    let challanQuery = supabase
+      .from('challans')
+      .select('id')
+    
+    if (startDate) {
+      challanQuery = challanQuery.gte('date', startDate)
+    }
+    if (endDate) {
+      challanQuery = challanQuery.lte('date', endDate)
+    }
+    
+    const { data: challans } = await challanQuery
+    challanIds = challans?.map(c => c.id) || []
+    
+    if (challanIds.length === 0) {
+      return { data: [], totalQuantity: 0, totalRevenue: 0, error: null }
+    }
+  }
+  
   // Get all sales for these inventory items
-  const { data, error } = await supabase
+  let query = supabase
     .from('challan_items')
     .select(`
       id,
@@ -230,6 +301,12 @@ export async function getSalesByCompany(companyId) {
     .in('inventory_id', inventoryIds)
     .order('challan(date)', { ascending: false })
   
+  if (challanIds) {
+    query = query.in('challan_id', challanIds)
+  }
+  
+  const { data, error } = await query
+  
   if (error) {
     return { data: [], totalQuantity: 0, totalRevenue: 0, error: error.message }
   }
@@ -241,7 +318,7 @@ export async function getSalesByCompany(companyId) {
 }
 
 // Get aggregated sales by grade (for Board, MDF, Flexi)
-export async function getSalesByBoardGrade(grade) {
+export async function getSalesByBoardGrade(grade, startDate = null, endDate = null) {
   const supabase = await createClient()
   
   // Get all inventory IDs for this grade
@@ -256,8 +333,30 @@ export async function getSalesByBoardGrade(grade) {
   
   const inventoryIds = inventoryItems.map(item => item.id)
   
+  // If date filters are provided, first get challan IDs in date range
+  let challanIds = null
+  if (startDate || endDate) {
+    let challanQuery = supabase
+      .from('challans')
+      .select('id')
+    
+    if (startDate) {
+      challanQuery = challanQuery.gte('date', startDate)
+    }
+    if (endDate) {
+      challanQuery = challanQuery.lte('date', endDate)
+    }
+    
+    const { data: challans } = await challanQuery
+    challanIds = challans?.map(c => c.id) || []
+    
+    if (challanIds.length === 0) {
+      return { data: [], totalQuantity: 0, totalRevenue: 0, error: null }
+    }
+  }
+  
   // Get all sales for these inventory items
-  const { data, error } = await supabase
+  let query = supabase
     .from('challan_items')
     .select(`
       id,
@@ -273,6 +372,12 @@ export async function getSalesByBoardGrade(grade) {
     `)
     .in('inventory_id', inventoryIds)
     .order('challan(date)', { ascending: false })
+  
+  if (challanIds) {
+    query = query.in('challan_id', challanIds)
+  }
+  
+  const { data, error } = await query
   
   if (error) {
     return { data: [], totalQuantity: 0, totalRevenue: 0, error: error.message }

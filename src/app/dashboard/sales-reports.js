@@ -20,6 +20,11 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
   const [selectedProduct, setSelectedProduct] = useState('')
   const [salesData, setSalesData] = useState(null)
   const [loading, setLoading] = useState(false)
+  
+  // Date range filter states
+  const [dateRange, setDateRange] = useState('this_month')
+  const [customStart, setCustomStart] = useState('')
+  const [customEnd, setCustomEnd] = useState('')
 
   // Reset and load categories when type changes
   useEffect(() => {
@@ -62,6 +67,17 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
       setSalesData(null)
     }
   }, [selectedCategory])
+
+  // Reload data when date range changes
+  useEffect(() => {
+    if (selectedProduct) {
+      loadSalesForProduct()
+    } else if (selectedCategory) {
+      loadSalesForCategory()
+    } else if (selectedType) {
+      loadSalesForType()
+    }
+  }, [dateRange, customStart, customEnd])
 
   // Load sales when product changes
   useEffect(() => {
@@ -119,6 +135,71 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
     setLoading(false)
   }
 
+  // Helper function to get date range based on filter
+  function getDateRange() {
+    const today = new Date()
+    let startDate = null
+    let endDate = null
+
+    switch (dateRange) {
+      case 'last_7_days':
+        startDate = new Date(today)
+        startDate.setDate(today.getDate() - 7)
+        startDate = startDate.toISOString().split('T')[0]
+        break
+      
+      case 'this_month':
+        startDate = new Date(today.getFullYear(), today.getMonth(), 1)
+        startDate = startDate.toISOString().split('T')[0]
+        break
+      
+      case 'last_month':
+        startDate = new Date(today.getFullYear(), today.getMonth() - 1, 1)
+        endDate = new Date(today.getFullYear(), today.getMonth(), 0)
+        startDate = startDate.toISOString().split('T')[0]
+        endDate = endDate.toISOString().split('T')[0]
+        break
+      
+      case 'custom':
+        startDate = customStart || null
+        endDate = customEnd || null
+        break
+    }
+
+    return { startDate, endDate }
+  }
+
+  async function loadSalesForType() {
+    setLoading(true)
+    const { startDate, endDate } = getDateRange()
+    const result = await getSalesByType(selectedType, startDate, endDate)
+    setSalesData(result)
+    setLoading(false)
+  }
+
+  async function loadSalesForCategory() {
+    setLoading(true)
+    const { startDate, endDate } = getDateRange()
+    let result
+    
+    if (selectedType === 'Plywood') {
+      result = await getSalesByCompany(selectedCategory, startDate, endDate)
+    } else if (['Board', 'MDF', 'Flexi'].includes(selectedType)) {
+      result = await getSalesByBoardGrade(selectedCategory, startDate, endDate)
+    }
+    
+    setSalesData(result)
+    setLoading(false)
+  }
+
+  async function loadSalesForProduct() {
+    setLoading(true)
+    const { startDate, endDate } = getDateRange()
+    const result = await getProductSales(selectedProduct, startDate, endDate)
+    setSalesData(result)
+    setLoading(false)
+  }
+
   function getProductLabel(product) {
     // MDF and Flexi don't use measurement field, only thickness
     if (product.measurement && product.measurement !== 'null') {
@@ -139,11 +220,69 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
   return (
     <div className="bg-white border border-neutral-200 rounded-2xl p-6">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6 pb-4 border-b border-neutral-200">
-        <div className="bg-brand text-white p-2 rounded-lg">
-          <BarChart3 className="w-5 h-5" />
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-neutral-200 flex-wrap gap-4">
+        <div className="flex items-center gap-3">
+          <div className="bg-brand text-white p-2 rounded-lg">
+            <BarChart3 className="w-5 h-5" />
+          </div>
+          <h2 className="text-2xl font-bold text-brand">Sales Reports</h2>
         </div>
-        <h2 className="text-2xl font-bold text-brand">Sales Reports</h2>
+        
+        {/* Date Filters */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2 bg-neutral-100/50 p-1 rounded-lg border border-neutral-200">
+            <button
+              onClick={() => setDateRange('last_7_days')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                dateRange === 'last_7_days' ? 'bg-brand text-white font-semibold' : 'text-neutral-600 hover:text-brand hover:bg-brand/5'
+              }`}
+            >
+              Last 7 Days
+            </button>
+            <button
+              onClick={() => setDateRange('this_month')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                dateRange === 'this_month' ? 'bg-brand text-white font-semibold' : 'text-neutral-600 hover:text-brand hover:bg-brand/5'
+              }`}
+            >
+              This Month
+            </button>
+            <button
+              onClick={() => setDateRange('last_month')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                dateRange === 'last_month' ? 'bg-brand text-white font-semibold' : 'text-neutral-600 hover:text-brand hover:bg-brand/5'
+              }`}
+            >
+              Last Month
+            </button>
+            <button
+              onClick={() => setDateRange('custom')}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                dateRange === 'custom' ? 'bg-brand text-white font-semibold' : 'text-neutral-600 hover:text-brand hover:bg-brand/5'
+              }`}
+            >
+              Custom
+            </button>
+          </div>
+
+          {dateRange === 'custom' && (
+            <div className="flex items-center gap-2 animate-in fade-in slide-in-from-right-4">
+              <input
+                type="date"
+                value={customStart}
+                onChange={(e) => setCustomStart(e.target.value)}
+                className="px-3 py-1.5 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+              />
+              <span className="text-neutral-400">-</span>
+              <input
+                type="date"
+                value={customEnd}
+                onChange={(e) => setCustomEnd(e.target.value)}
+                className="px-3 py-1.5 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Filters */}
