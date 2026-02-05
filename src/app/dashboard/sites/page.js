@@ -13,7 +13,7 @@ export default function SitesPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">Site Details</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">Site Details</h1>
         <p className="text-neutral-600 mt-1">Search customer and manage their sites</p>
       </div>
 
@@ -30,7 +30,7 @@ export default function SitesPage() {
         <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-6 mb-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-black text-white rounded-xl flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-brand text-white rounded-xl flex items-center justify-center flex-shrink-0">
                 <User size={24} />
               </div>
               <div className="overflow-hidden">
@@ -44,7 +44,7 @@ export default function SitesPage() {
 
             <Link
               href={`/dashboard/sites/new?customer=${selectedCustomer.id}`}
-              className="flex items-center justify-center gap-2 bg-black text-white px-5 py-2.5 rounded-xl font-medium hover:bg-neutral-800 transition-colors w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 bg-brand text-white px-5 py-2.5 rounded-xl font-medium hover:bg-brand-dark transition-colors w-full sm:w-auto"
             >
               <Plus size={20} />
               Add Site

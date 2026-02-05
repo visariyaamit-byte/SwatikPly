@@ -2,20 +2,71 @@
 
 import { useState } from 'react'
 import { createChallan } from '@/app/actions/challans'
+import { getSitesByCustomer } from '@/app/actions/sites'
 import { useRouter } from 'next/navigation'
 import { Plus, Trash2, Package } from 'lucide-react'
 
-export default function CreateChallanForm({ nextChallanNumber, inventory }) {
+export default function CreateChallanForm({ nextChallanNumber, inventory, customers }) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   
   // Form fields
-  const [customerName, setCustomerName] = useState('')
+  const [selectedCustomerId, setSelectedCustomerId] = useState('')
+  const [customerName, setCustomerName] = useState('') // Kept for display/compat
+  
+  const [sites, setSites] = useState([])
+  const [selectedSiteId, setSelectedSiteId] = useState('')
+  const [siteAddress, setSiteAddress] = useState('')
+  
+  const [phone, setPhone] = useState('')
+  const [additionalPhone, setAdditionalPhone] = useState('')
+  
   const [date, setDate] = useState(new Date().toISOString().split('T')[0])
   const [items, setItems] = useState([])
   const [cgstPercentage, setCgstPercentage] = useState(0)
   const [sgstPercentage, setSgstPercentage] = useState(0)
+
   const [transportCharges, setTransportCharges] = useState(0)
+  const [labourCharges, setLabourCharges] = useState(0)
+
+  // Handle Customer Selection
+  async function handleCustomerChange(e) {
+    const customerId = e.target.value
+    setSelectedCustomerId(customerId)
+    
+    // Reset site selection
+    setSites([])
+    setSelectedSiteId('')
+    setSiteAddress('')
+
+    if (customerId) {
+        const customer = customers.find(c => c.id === customerId)
+        if (customer) {
+            setCustomerName(customer.name)
+            setPhone(customer.phone)
+            
+            // Fetch sites
+            const customerSites = await getSitesByCustomer(customerId)
+            setSites(customerSites)
+        }
+    } else {
+        setCustomerName('')
+        setPhone('')
+    }
+  }
+
+  // Handle Site Selection
+  function handleSiteChange(e) {
+      const siteId = e.target.value
+      setSelectedSiteId(siteId)
+      
+      const site = sites.find(s => s.id === siteId)
+      if (site) {
+          setSiteAddress(`${site.flat_number}, ${site.address}`)
+      } else {
+          setSiteAddress('')
+      }
+  }
 
   // Add item from inventory
   function addInventoryItem(inventoryId) {
@@ -88,7 +139,7 @@ export default function CreateChallanForm({ nextChallanNumber, inventory }) {
   const subtotal = items.reduce((sum, item) => sum + (item.amount || 0), 0)
   const cgstAmount = (subtotal * cgstPercentage) / 100
   const sgstAmount = (subtotal * sgstPercentage) / 100
-  const total = subtotal + cgstAmount + sgstAmount + transportCharges
+  const total = subtotal + cgstAmount + sgstAmount + transportCharges + labourCharges
 
   // Submit form
   async function handleSubmit(e) {
@@ -111,10 +162,16 @@ export default function CreateChallanForm({ nextChallanNumber, inventory }) {
 
     const formData = new FormData()
     formData.append('customer_name', customerName)
+    formData.append('customer_id', selectedCustomerId)
+    formData.append('site_id', selectedSiteId)
+    formData.append('site_address', siteAddress)
+    formData.append('phone', phone)
+    formData.append('additional_phone', additionalPhone)
     formData.append('date', date)
     formData.append('cgst_percentage', cgstPercentage)
     formData.append('sgst_percentage', sgstPercentage)
     formData.append('transport_charges', transportCharges)
+    formData.append('labour_charges', labourCharges)
     formData.append('items', JSON.stringify(items.map(item => ({
       inventory_id: item.inventory_id,
       description: item.description,
@@ -150,19 +207,71 @@ export default function CreateChallanForm({ nextChallanNumber, inventory }) {
           />
         </div>
 
-        {/* Customer Name */}
+        {/* Customer Selection */}
         <div>
           <label className="block text-sm font-medium text-neutral-700 mb-2">
-            M/s (Customer Name) <span className="text-red-500">*</span>
+            Select Customer <span className="text-red-500">*</span>
           </label>
-          <input
-            type="text"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
+          <select
+            value={selectedCustomerId}
+            onChange={handleCustomerChange}
             required
             className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter customer name"
-          />
+          >
+            <option value="">Select a customer...</option>
+            {customers?.map(customer => (
+                <option key={customer.id} value={customer.id}>
+                    {customer.name}
+                </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Site Selection */}
+        <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-2">
+                Predict Site (Optional)
+            </label>
+            <select
+                value={selectedSiteId}
+                onChange={handleSiteChange}
+                disabled={!selectedCustomerId || sites.length === 0}
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+            >
+                <option value="">Select a site...</option>
+                {sites.map(site => (
+                    <option key={site.id} value={site.id}>
+                        {site.address} {site.flat_number ? `(${site.flat_number})` : ''}
+                    </option>
+                ))}
+            </select>
+        </div>
+
+        {/* Phone Number */}
+        <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-2">
+                Phone Number
+            </label>
+            <input 
+                type="text"
+                value={phone}
+                readOnly
+                className="w-full px-4 py-3 bg-neutral-100 border border-neutral-300 rounded-xl text-neutral-500 cursor-not-allowed" 
+            />
+        </div>
+
+        {/* Additional Phone */}
+        <div>
+            <label className="block text-sm font-medium text-neutral-700 mb-2">
+                Additional Phone
+            </label>
+            <input 
+                type="text"
+                value={additionalPhone}
+                onChange={(e) => setAdditionalPhone(e.target.value)}
+                placeholder="Enter alternate number"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
         </div>
 
         {/* Date */}
@@ -325,7 +434,7 @@ export default function CreateChallanForm({ nextChallanNumber, inventory }) {
                     step="0.01"
                     value={cgstPercentage}
                     onChange={(e) => setCgstPercentage(parseFloat(e.target.value) || 0)}
-                    className="w-16 px-2 py-1 border border-neutral-300 rounded text-sm text-center focus:outline-none focus:ring-1 focus:ring-black"
+                    className="w-16 px-2 py-1 border border-neutral-300 rounded text-sm text-center focus:outline-none focus:ring-1 focus:ring-brand"
                     placeholder="0"
                   />
                 </div>
@@ -341,7 +450,7 @@ export default function CreateChallanForm({ nextChallanNumber, inventory }) {
                     step="0.01"
                     value={sgstPercentage}
                     onChange={(e) => setSgstPercentage(parseFloat(e.target.value) || 0)}
-                    className="w-16 px-2 py-1 border border-neutral-300 rounded text-sm text-center focus:outline-none focus:ring-1 focus:ring-black"
+                    className="w-16 px-2 py-1 border border-neutral-300 rounded text-sm text-center focus:outline-none focus:ring-1 focus:ring-brand"
                     placeholder="0"
                   />
                 </div>
@@ -358,7 +467,39 @@ export default function CreateChallanForm({ nextChallanNumber, inventory }) {
                     step="0.01"
                     value={transportCharges}
                     onChange={(e) => setTransportCharges(parseFloat(e.target.value) || 0)}
-                    className="w-24 px-2 py-1 border border-neutral-300 rounded text-sm text-right focus:outline-none focus:ring-1 focus:ring-black"
+                    className="w-24 px-2 py-1 border border-neutral-300 rounded text-sm text-right focus:outline-none focus:ring-1 focus:ring-brand"
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center text-sm gap-4">
+                <span className="text-neutral-600">Labour</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-neutral-400">₹</span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={labourCharges}
+                    onChange={(e) => setLabourCharges(parseFloat(e.target.value) || 0)}
+                    className="w-24 px-2 py-1 border border-neutral-300 rounded text-sm text-right focus:outline-none focus:ring-1 focus:ring-brand"
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center text-sm gap-4">
+                <span className="text-neutral-600">Labour</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-neutral-400">₹</span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={labourCharges}
+                    onChange={(e) => setLabourCharges(parseFloat(e.target.value) || 0)}
+                    className="w-24 px-2 py-1 border border-neutral-300 rounded text-sm text-right focus:outline-none focus:ring-1 focus:ring-brand"
                     placeholder="0.00"
                   />
                 </div>
@@ -519,6 +660,29 @@ export default function CreateChallanForm({ nextChallanNumber, inventory }) {
                   </td>
                   <td></td>
                 </tr>
+                <tr>
+                  <td colSpan="2" className="px-4 py-2">
+                    <div className="flex items-center gap-2">
+                      <label className="text-sm text-neutral-600">Labour</label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={labourCharges}
+                        onChange={(e) => setLabourCharges(parseFloat(e.target.value) || 0)}
+                        className="w-32 px-2 py-1 border border-neutral-300 rounded text-sm text-right"
+                        placeholder="0.00"
+                      />
+                    </div>
+                  </td>
+                  <td className="px-4 py-2 text-right text-sm">
+                    Labour Charges
+                  </td>
+                  <td className="px-4 py-2 text-right">
+                    ₹{labourCharges.toFixed(2)}
+                  </td>
+                  <td></td>
+                </tr>
                 <tr className="border-t-2 border-neutral-300">
                   <td colSpan="3" className="px-4 py-4 text-right font-semibold text-lg">
                     Total
@@ -547,7 +711,7 @@ export default function CreateChallanForm({ nextChallanNumber, inventory }) {
         <button
           type="submit"
           disabled={isSubmitting || items.length === 0}
-          className="px-6 py-3 bg-neutral-900 hover:bg-neutral-800 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-3 bg-brand hover:bg-brand-dark text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Creating...' : 'Create Challan'}
         </button>

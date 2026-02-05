@@ -34,7 +34,7 @@ export default async function NewSitePage({ searchParams }) {
           <ArrowLeft size={20} />
           Back to Sites
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight">Add New Site</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">Add New Site</h1>
         <p className="text-neutral-600 mt-1">
           Create a new site for <span className="font-semibold">{customer.name}</span>
         </p>
@@ -53,7 +53,7 @@ export default async function NewSitePage({ searchParams }) {
               id="flat_number"
               name="flat_number"
               required
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="e.g., A-101, Flat 5B, Villa 3"
             />
           </div>
@@ -68,7 +68,7 @@ export default async function NewSitePage({ searchParams }) {
               name="address"
               required
               rows={3}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all resize-none"
               placeholder="Enter complete address"
             />
           </div>
@@ -77,7 +77,7 @@ export default async function NewSitePage({ searchParams }) {
           <div className="flex gap-3 pt-4">
             <button
               type="submit"
-              className="flex-1 bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+              className="flex-1 bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors"
             >
               Create Site
             </button>

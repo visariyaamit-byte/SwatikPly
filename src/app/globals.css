@@ -15,7 +15,7 @@ body {
 }
 
 body {
-  background: #ffffff;
+  background: #FAFAFA;
   color: #0a0a0a;
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -38,5 +38,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a3a3a3;
+  background: #B01C1E;
 }

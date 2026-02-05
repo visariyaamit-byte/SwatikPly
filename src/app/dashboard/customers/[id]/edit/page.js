@@ -27,7 +27,7 @@ export default async function EditCustomerPage({ params }) {
           <ArrowLeft size={20} />
           Back to Customers
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight">Edit Customer</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">Edit Customer</h1>
         <p className="text-neutral-600 mt-1">Update customer information</p>
       </div>
 
@@ -45,7 +45,7 @@ export default async function EditCustomerPage({ params }) {
               name="name"
               required
               defaultValue={customer.name}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="Enter customer name"
             />
           </div>
@@ -62,7 +62,7 @@ export default async function EditCustomerPage({ params }) {
               required
               pattern="[0-9]{10}"
               defaultValue={customer.phone}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="9876543210"
             />
             <p className="text-xs text-neutral-500 mt-1">10-digit mobile number</p>
@@ -78,7 +78,7 @@ export default async function EditCustomerPage({ params }) {
               id="email"
               name="email"
               defaultValue={customer.email || ''}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="customer@example.com"
             />
           </div>
@@ -87,7 +87,7 @@ export default async function EditCustomerPage({ params }) {
           <div className="flex gap-3 pt-4">
             <button
               type="submit"
-              className="flex-1 bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+              className="flex-1 bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors"
             >
               Update Customer
             </button>

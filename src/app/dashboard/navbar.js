@@ -30,10 +30,10 @@ export default function Navbar() {
           {/* Logo Section */}
           <div className="flex-shrink-0 flex items-center md:hidden">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-white">
+              <div className="relative w-10 h-10 rounded-full border-2 border-brand overflow-hidden bg-white">
                 <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
               </div>
-              <span className="text-xl font-bold tracking-tight">Swastik Ply</span>
+              <span className="text-xl font-bold tracking-tight text-brand">Swastik Ply</span>
             </div>
           </div>
 
@@ -45,8 +45,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive(link.href)
-                    ? 'bg-neutral-100 text-black'
-                    : 'text-neutral-600 hover:text-black hover:bg-neutral-50'
+                    ? 'bg-brand text-white'
+                    : 'text-neutral-600 hover:text-brand hover:bg-neutral-50'
                 }`}
               >
                 {link.label}
@@ -58,7 +58,7 @@ export default function Navbar() {
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-black hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-neutral-900"
+              className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-black hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand"
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
@@ -82,8 +82,8 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`block px-3 py-2 rounded-md text-base font-medium ${
                 isActive(link.href)
-                  ? 'bg-neutral-100 text-black'
-                  : 'text-neutral-600 hover:text-black hover:bg-neutral-50'
+                  ? 'bg-brand text-white'
+                  : 'text-neutral-600 hover:text-brand hover:bg-neutral-50'
               }`}
             >
               {link.label}

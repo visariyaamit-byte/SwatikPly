@@ -29,7 +29,7 @@ export default function EditLaminateModal({ laminate, siteId, onClose }) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold">Edit Laminate Entry</h3>
+          <h3 className="text-xl font-bold text-brand">Edit Laminate Entry</h3>
           <button
             onClick={onClose}
             className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
@@ -51,7 +51,7 @@ export default function EditLaminateModal({ laminate, siteId, onClose }) {
                 name="room"
                 defaultValue={laminate.room}
                 required
-                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
                 placeholder="e.g., Living Room"
               />
             </div>
@@ -67,7 +67,7 @@ export default function EditLaminateModal({ laminate, siteId, onClose }) {
                 name="model_name"
                 required
                 defaultValue={laminate.model_name}
-                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
                 placeholder="e.g., Premium Oak"
               />
             </div>
@@ -83,7 +83,7 @@ export default function EditLaminateModal({ laminate, siteId, onClose }) {
                 name="date"
                 required
                 defaultValue={laminate.date}
-                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function EditLaminateModal({ laminate, siteId, onClose }) {
               required
               rows={2}
               defaultValue={laminate.description}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand resize-none"
               placeholder="Describe the laminate details"
             />
           </div>
@@ -114,7 +114,7 @@ export default function EditLaminateModal({ laminate, siteId, onClose }) {
               name="notes"
               rows={2}
               defaultValue={laminate.notes || ''}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand resize-none"
               placeholder="Additional notes"
             />
           </div>
@@ -124,7 +124,7 @@ export default function EditLaminateModal({ laminate, siteId, onClose }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors disabled:opacity-50"
+              className="flex-1 bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors disabled:opacity-50"
             >
               {isSubmitting ? 'Updating...' : 'Update Entry'}
             </button>

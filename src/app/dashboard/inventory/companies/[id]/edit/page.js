@@ -28,7 +28,7 @@ export default async function EditCompanyPage({ params }) {
           Back to Companies
         </Link>
 
-        <h1 className="text-3xl font-bold tracking-tight">Edit Company</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">Edit Company</h1>
         <p className="text-neutral-600 mt-1">Update company information</p>
       </div>
 
@@ -46,7 +46,7 @@ export default async function EditCompanyPage({ params }) {
               name="name"
               required
               defaultValue={company.name}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="e.g., Century Ply, Greenply, etc."
             />
           </div>
@@ -55,7 +55,7 @@ export default async function EditCompanyPage({ params }) {
           <div className="flex gap-3 pt-4">
             <button
               type="submit"
-              className="flex-1 bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+              className="flex-1 bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors"
             >
               Update Company
             </button>

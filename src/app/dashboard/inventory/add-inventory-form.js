@@ -88,7 +88,7 @@ export default function AddInventoryForm({ companies }) {
             value={productType}
             onChange={(e) => setProductType(e.target.value)}
             required
-            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
           >
             {PRODUCT_TYPES.map((type) => (
               <option key={type} value={type}>{type}</option>
@@ -106,7 +106,7 @@ export default function AddInventoryForm({ companies }) {
               id="company_id"
               name="company_id"
               required
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
             >
               <option value="">Select company</option>
               {companies.map((company) => (
@@ -123,7 +123,7 @@ export default function AddInventoryForm({ companies }) {
               id="grade"
               name="grade"
               required
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
             >
               <option value="">Select {gradeLabel.toLowerCase()}</option>
               {gradeOptions.map((option) => (
@@ -143,7 +143,7 @@ export default function AddInventoryForm({ companies }) {
               id="measurement"
               name="measurement"
               required
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
             >
               <option value="">Select measurement</option>
               {measurements.map((measurement) => (
@@ -162,7 +162,7 @@ export default function AddInventoryForm({ companies }) {
             id="thickness"
             name="thickness"
             required
-            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
           >
             <option value="">Select thickness</option>
             {thicknesses.map((thickness) => (
@@ -182,7 +182,7 @@ export default function AddInventoryForm({ companies }) {
             name="quantity"
             required
             min="0"
-            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
             placeholder="0"
           />
         </div>
@@ -197,7 +197,7 @@ export default function AddInventoryForm({ companies }) {
           id="notes"
           name="notes"
           rows={2}
-          className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"
+          className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand resize-none"
           placeholder="Additional notes"
         />
       </div>
@@ -206,7 +206,7 @@ export default function AddInventoryForm({ companies }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors disabled:opacity-50"
+        className="w-full bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors disabled:opacity-50"
       >
         {isSubmitting ? 'Adding...' : 'Add to Inventory'}
       </button>

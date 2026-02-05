@@ -25,7 +25,7 @@ export default async function InventoryPage() {
       icon: Layers,
       href: '/dashboard/inventory/plywood',
       count: plywoodCount,
-      color: 'bg-neutral-100 text-neutral-900 border-neutral-200'
+      color: 'bg-brand/10 text-brand border-brand/20'
     },
     {
       title: 'Board Inventory',
@@ -33,7 +33,7 @@ export default async function InventoryPage() {
       icon: Package,
       href: '/dashboard/inventory/board',
       count: boardCount,
-      color: 'bg-neutral-100 text-neutral-900 border-neutral-200'
+      color: 'bg-brand/10 text-brand border-brand/20'
     },
     {
       title: 'MDF Inventory',
@@ -41,7 +41,7 @@ export default async function InventoryPage() {
       icon: Box,
       href: '/dashboard/inventory/mdf',
       count: mdfCount,
-      color: 'bg-neutral-100 text-neutral-900 border-neutral-200'
+      color: 'bg-brand/10 text-brand border-brand/20'
     },
     {
       title: 'Flexi Inventory',
@@ -49,7 +49,7 @@ export default async function InventoryPage() {
       icon: FileText,
       href: '/dashboard/inventory/flexi',
       count: flexiCount,
-      color: 'bg-neutral-100 text-neutral-900 border-neutral-200'
+      color: 'bg-brand/10 text-brand border-brand/20'
     }
   ]
 
@@ -59,7 +59,7 @@ export default async function InventoryPage() {
       <div className="mb-8">
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Inventory Management</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-brand">Inventory Management</h1>
             <p className="text-neutral-600 mt-1">Manage plywood, board, MDF, and flexi stock</p>
           </div>
 
@@ -81,7 +81,7 @@ export default async function InventoryPage() {
               <Link
                 key={card.href}
                 href={card.href}
-                className="group bg-white border-2 border-neutral-200 rounded-2xl p-6 hover:border-neutral-900 hover:shadow-lg transition-all duration-200"
+                className="group bg-white border-2 border-neutral-200 rounded-2xl p-6 hover:border-brand hover:shadow-lg transition-all duration-200"
               >
                 <div className={`w-12 h-12 rounded-xl ${card.color} flex items-center justify-center mb-4`}>
                   <Icon size={24} />

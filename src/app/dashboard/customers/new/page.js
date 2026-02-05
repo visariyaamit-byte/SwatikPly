@@ -14,7 +14,7 @@ export default function NewCustomerPage() {
           <ArrowLeft size={20} />
           Back to Customers
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight">Add New Customer</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">Add New Customer</h1>
         <p className="text-neutral-600 mt-1">Create a new customer record</p>
       </div>
 
@@ -31,7 +31,7 @@ export default function NewCustomerPage() {
               id="name"
               name="name"
               required
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="Enter customer name"
             />
           </div>
@@ -47,7 +47,7 @@ export default function NewCustomerPage() {
               name="phone"
               required
               pattern="[0-9]{10}"
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="9876543210"
             />
             <p className="text-xs text-neutral-500 mt-1">10-digit mobile number</p>
@@ -62,7 +62,7 @@ export default function NewCustomerPage() {
               type="email"
               id="email"
               name="email"
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="customer@example.com"
             />
           </div>
@@ -71,7 +71,7 @@ export default function NewCustomerPage() {
           <div className="flex gap-3 pt-4">
             <button
               type="submit"
-              className="flex-1 bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+              className="flex-1 bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors"
             >
               Add Customer
             </button>

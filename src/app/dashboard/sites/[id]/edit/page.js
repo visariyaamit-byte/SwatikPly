@@ -27,7 +27,7 @@ export default async function EditSitePage({ params }) {
           <ArrowLeft size={20} />
           Back to Site Details
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight">Edit Site</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">Edit Site</h1>
         <p className="text-neutral-600 mt-1">Update site information</p>
       </div>
 
@@ -56,7 +56,7 @@ export default async function EditSitePage({ params }) {
               name="flat_number"
               required
               defaultValue={site.flat_number}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
               placeholder="e.g., A-101, Flat 5B, Villa 3"
             />
           </div>
@@ -72,7 +72,7 @@ export default async function EditSitePage({ params }) {
               required
               rows={3}
               defaultValue={site.address}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all resize-none"
               placeholder="Enter complete address"
             />
           </div>
@@ -81,7 +81,7 @@ export default async function EditSitePage({ params }) {
           <div className="flex gap-3 pt-4">
             <button
               type="submit"
-              className="flex-1 bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+              className="flex-1 bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors"
             >
               Update Site
             </button>

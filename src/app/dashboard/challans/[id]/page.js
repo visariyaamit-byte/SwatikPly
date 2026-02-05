@@ -26,7 +26,7 @@ export default async function ChallanViewPage({ params }) {
         
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">
+            <h1 className="text-3xl font-bold tracking-tight text-brand">
               Challan #{challan.challan_number}
             </h1>
             <p className="text-neutral-600 mt-1">

@@ -140,10 +140,10 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
     <div className="bg-white border border-neutral-200 rounded-2xl p-6">
       {/* Header */}
       <div className="flex items-center gap-3 mb-6 pb-4 border-b border-neutral-200">
-        <div className="bg-neutral-900 text-white p-2 rounded-lg">
+        <div className="bg-brand text-white p-2 rounded-lg">
           <BarChart3 className="w-5 h-5" />
         </div>
-        <h2 className="text-2xl font-bold">Sales Reports</h2>
+        <h2 className="text-2xl font-bold text-brand">Sales Reports</h2>
       </div>
 
       {/* Filters */}
@@ -156,7 +156,7 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
-            className="w-full px-4 py-2.5 border border-neutral-300 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent"
+            className="w-full px-4 py-2.5 border border-neutral-300 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
           >
             <option value="">-- Choose Type --</option>
             {productTypes.map(type => (
@@ -174,7 +174,7 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             disabled={!selectedType || availableCategories.length === 0}
-            className="w-full px-4 py-2.5 border border-neutral-300 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent disabled:bg-neutral-100 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2.5 border border-neutral-300 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent disabled:bg-neutral-100 disabled:cursor-not-allowed"
           >
             <option value="">-- Choose {selectedType === 'Plywood' ? 'Company' : 'Type'} --</option>
             {availableCategories.map(option => (
@@ -194,7 +194,7 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
             value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
             disabled={!selectedCategory || products.length === 0}
-            className="w-full px-4 py-2.5 border border-neutral-300 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent disabled:bg-neutral-100 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2.5 border border-neutral-300 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent disabled:bg-neutral-100 disabled:cursor-not-allowed"
           >
             <option value="">-- Choose Product --</option>
             {products.map(product => (
@@ -209,7 +209,7 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
       {/* Loading State */}
       {loading && (
         <div className="text-center py-12 bg-neutral-50 rounded-xl">
-          <div className="inline-block w-8 h-8 border-4 border-neutral-900 border-t-transparent rounded-full animate-spin mb-3"></div>
+          <div className="inline-block w-8 h-8 border-4 border-brand border-t-transparent rounded-full animate-spin mb-3"></div>
           <p className="font-medium text-neutral-600">Loading...</p>
         </div>
       )}
@@ -218,7 +218,7 @@ export default function SalesReports({ productTypes, companies, boardGrades }) {
       {!loading && salesData && (
         <div className="border border-neutral-200 rounded-xl overflow-hidden">
           {/* Total Summary */}
-          <div className="bg-neutral-900 text-white p-6">
+          <div className="bg-brand text-white p-6">
             <h3 className="text-lg font-bold mb-4">Total Sales</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>

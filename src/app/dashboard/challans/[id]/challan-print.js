@@ -83,7 +83,7 @@ export default function ChallanPrint({ challan }) {
         <div className="flex gap-3 mb-3">
           <button
             onClick={generatePDF}
-            className="flex items-center gap-2 px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded-xl font-medium transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-brand hover:bg-brand-dark text-white rounded-xl font-medium transition-colors"
           >
             <Printer size={20} />
             Download PDF
@@ -143,6 +143,22 @@ function ChallanTemplate({ challan }) {
         <div className="mb-3 text-[10px]">
           <span className="font-normal">M/s</span>{' '}
           <span className="font-bold">{challan.customer_name}</span>
+          
+          {challan.site_address && (
+              <div className="mt-1">
+                  <span className="font-normal">Site:</span>{' '}
+                  <span className="font-bold">{challan.site_address}</span>
+              </div>
+          )}
+          
+          {(challan.phone || challan.additional_phone) && (
+              <div className="mt-1">
+                  <span className="font-normal">Phone:</span>{' '}
+                  <span className="font-bold">
+                    {[challan.phone, challan.additional_phone].filter(Boolean).join(', ')}
+                  </span>
+              </div>
+          )}
         </div>
 
         {/* Items Table */}
@@ -156,7 +172,7 @@ function ChallanTemplate({ challan }) {
             </tr>
           </thead>
           <tbody>
-            {challan.challan_items.slice(0, 13).map((item) => (
+            {challan.challan_items.slice(0, 12).map((item) => (
               <tr key={item.id} className="h-[7mm]">
                 <td className="border border-neutral-300 px-2 py-1">{item.description}</td>
                 <td className="border border-neutral-300 px-2 py-1 text-center">{item.quantity}</td>
@@ -169,7 +185,7 @@ function ChallanTemplate({ challan }) {
               </tr>
             ))}
             {/* Empty rows */}
-            {Array.from({ length: Math.max(0, 13 - challan.challan_items.length) }).map((_, i) => (
+            {Array.from({ length: Math.max(0, 12 - challan.challan_items.length) }).map((_, i) => (
               <tr key={`empty-${i}`} className="h-[7mm]">
                 <td className="border border-neutral-300 px-2 py-1">&nbsp;</td>
                 <td className="border border-neutral-300 px-2 py-1">&nbsp;</td>
@@ -216,6 +232,17 @@ function ChallanTemplate({ challan }) {
                 </td>
                 <td className="border border-neutral-300 px-1 py-0.5 text-right">
                   ₹{(challan.transport_charges || 0).toFixed(2)}
+                </td>
+              </tr>
+            )}
+            {/* Labour Charges */}
+            {challan.labour_charges > 0 && (
+              <tr className="h-[5mm]">
+                <td colSpan="3" className="border border-neutral-300 px-1 py-0.5 text-right">
+                  Labour
+                </td>
+                <td className="border border-neutral-300 px-1 py-0.5 text-right">
+                  ₹{(challan.labour_charges || 0).toFixed(2)}
                 </td>
               </tr>
             )}

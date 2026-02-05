@@ -83,10 +83,11 @@ export async function createChallan(formData) {
     const itemsJson = formData.get('items')
     const items = JSON.parse(itemsJson)
 
-    // Get tax and transport values
+    // Get tax, transport, and labour values
     const cgstPercentage = parseFloat(formData.get('cgst_percentage')) || 0
     const sgstPercentage = parseFloat(formData.get('sgst_percentage')) || 0
     const transportCharges = parseFloat(formData.get('transport_charges')) || 0
+    const labourCharges = parseFloat(formData.get('labour_charges')) || 0
 
     // Calculate subtotal (items only)
     const subtotal = items.reduce((sum, item) => sum + (item.amount || 0), 0)
@@ -95,15 +96,20 @@ export async function createChallan(formData) {
     const cgstAmount = (subtotal * cgstPercentage) / 100
     const sgstAmount = (subtotal * sgstPercentage) / 100
 
-    // Calculate total: subtotal + taxes + transport
-    const totalAmount = subtotal + cgstAmount + sgstAmount + transportCharges
+    // Calculate total: subtotal + taxes + transport + labour
+    const totalAmount = subtotal + cgstAmount + sgstAmount + transportCharges + labourCharges
 
     // Create challan
     const { data: challan, error: challanError } = await supabase
       .from('challans')
       .insert([{
         challan_number: challanNumber,
-        customer_name: formData.get('customer_name'),
+        customer_name: formData.get('customer_name'), // Keep for backward compatibility/display
+        customer_id: formData.get('customer_id') || null,
+        site_id: formData.get('site_id') || null,
+        site_address: formData.get('site_address'),
+        phone: formData.get('phone'),
+        additional_phone: formData.get('additional_phone'),
         date: formData.get('date'),
         subtotal: subtotal,
         cgst_percentage: cgstPercentage,
@@ -111,6 +117,7 @@ export async function createChallan(formData) {
         cgst_amount: cgstAmount,
         sgst_amount: sgstAmount,
         transport_charges: transportCharges,
+        labour_charges: labourCharges,
         total_amount: totalAmount,
         notes: formData.get('notes') || null
       }])
@@ -175,9 +182,17 @@ export async function createChallan(formData) {
   }
 }
 
-// Delete challan (does NOT restore inventory)
+// Delete challan (does NOT restore inventory) - Manager only
 export async function deleteChallan(id) {
   const supabase = await createClient()
+  
+  // Check if user is manager
+  const { getUserRole } = await import('./auth')
+  const role = await getUserRole()
+  
+  if (role !== 'manager') {
+    return { error: 'Unauthorized: Only managers can delete challans' }
+  }
 
   const { error } = await supabase
     .from('challans')
@@ -191,3 +206,4 @@ export async function deleteChallan(id) {
   revalidatePath('/dashboard/challans')
   return { success: true }
 }
+

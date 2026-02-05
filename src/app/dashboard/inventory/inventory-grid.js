@@ -100,7 +100,7 @@ export default function InventoryGrid({
           {!isEditing ? (
             <button
               onClick={() => setIsEditing(true)}
-              className="px-4 py-2 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors"
+              className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors"
             >
               Edit
             </button>
@@ -115,7 +115,7 @@ export default function InventoryGrid({
               <button
                 onClick={handleSave}
                 disabled={!hasChanges || isSaving}
-                className="px-4 py-2 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSaving ? 'Saving...' : 'Save Changes'}
               </button>
@@ -135,10 +135,10 @@ export default function InventoryGrid({
                     min="0"
                     value={data?.quantity || 0}
                     onChange={(e) => handleQuantityChange(thickness, e.target.value)}
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
                   />
                 ) : (
-                  <div className="text-2xl font-bold">{data?.quantity || 0}</div>
+                  <div className="text-2xl font-bold text-brand">{data?.quantity || 0}</div>
                 )}
               </div>
             )
@@ -155,7 +155,7 @@ export default function InventoryGrid({
         {!isEditing ? (
           <button
             onClick={() => setIsEditing(true)}
-            className="px-4 py-2 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors"
+            className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors"
           >
             Edit
           </button>
@@ -170,7 +170,7 @@ export default function InventoryGrid({
             <button
               onClick={handleSave}
               disabled={!hasChanges || isSaving}
-              className="px-4 py-2 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-brand text-white rounded-lg hover:bg-brand-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSaving ? 'Saving...' : 'Save Changes'}
             </button>
@@ -209,7 +209,7 @@ export default function InventoryGrid({
                           min="0"
                           value={data?.quantity || 0}
                           onChange={(e) => handleQuantityChange(key, e.target.value)}
-                          className="w-20 px-3 py-2 border border-neutral-300 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-neutral-900"
+                          className="w-20 px-3 py-2 border border-neutral-300 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-brand"
                         />
                       ) : (
                         <span className={`font-semibold text-lg ${data?.quantity > 0 ? 'text-neutral-900' : 'text-neutral-400'}`}>

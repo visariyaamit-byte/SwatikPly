@@ -20,13 +20,13 @@ export default async function CompaniesPage() {
 
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Manage Companies</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-brand">Manage Companies</h1>
             <p className="text-neutral-600 mt-1">Add and manage plywood manufacturers/brands</p>
           </div>
 
           <Link
             href="/dashboard/inventory/companies/new"
-            className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+            className="flex items-center gap-2 bg-brand text-white px-5 py-2.5 rounded-xl font-medium hover:bg-brand-dark transition-colors"
           >
             <Plus size={20} />
             Add Company
@@ -40,7 +40,7 @@ export default async function CompaniesPage() {
           <p className="text-neutral-600 mb-4">No companies found. Add your first company.</p>
           <Link
             href="/dashboard/inventory/companies/new"
-            className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+            className="inline-flex items-center gap-2 bg-brand text-white px-5 py-2.5 rounded-xl font-medium hover:bg-brand-dark transition-colors"
           >
             <Plus size={20} />
             Add Company

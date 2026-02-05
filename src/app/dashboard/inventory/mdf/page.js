@@ -27,7 +27,7 @@ export default async function MdfInventoryPage() {
           Back to Inventory
         </Link>
         
-        <h1 className="text-3xl font-bold tracking-tight">MDF Inventory</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">MDF Inventory</h1>
         <p className="text-neutral-600 mt-1">Manage MDF stock by color</p>
       </div>
 

@@ -34,7 +34,7 @@ export default function StockUpdateModal({ item, onClose }) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl p-6 max-w-md w-full">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold">Update Stock</h3>
+          <h3 className="text-xl font-bold text-brand">Update Stock</h3>
           <button
             onClick={onClose}
             className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
@@ -94,7 +94,7 @@ export default function StockUpdateModal({ item, onClose }) {
               name="quantity"
               required
               min="1"
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
               placeholder="Enter quantity"
             />
           </div>
@@ -109,7 +109,7 @@ export default function StockUpdateModal({ item, onClose }) {
               name="reason"
               required
               rows={2}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand resize-none"
               placeholder="e.g., New delivery, Sold to customer, Damaged goods"
             />
           </div>

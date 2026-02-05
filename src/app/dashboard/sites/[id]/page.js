@@ -29,7 +29,7 @@ export default async function SiteDetailsPage({ params }) {
         
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">{site.flat_number}</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-brand">{site.flat_number}</h1>
             <p className="text-neutral-600 mt-1">{site.address}</p>
           </div>
 
@@ -49,7 +49,7 @@ export default async function SiteDetailsPage({ params }) {
       {/* Customer Info */}
       <div className="bg-white border border-neutral-200 rounded-2xl p-6 mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-black text-white rounded-lg flex items-center justify-center">
+          <div className="w-10 h-10 bg-brand text-white rounded-lg flex items-center justify-center">
             <User size={20} />
           </div>
           <div>
@@ -64,7 +64,7 @@ export default async function SiteDetailsPage({ params }) {
       <div className="bg-white border border-neutral-200 rounded-2xl p-6">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-xl font-bold">Laminate Entries</h2>
+            <h2 className="text-xl font-bold text-brand">Laminate Entries</h2>
             <p className="text-sm text-neutral-600 mt-1">
               {site.laminate_entries?.length || 0} room(s) configured
             </p>

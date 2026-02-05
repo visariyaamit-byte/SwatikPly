@@ -86,7 +86,7 @@ export default function EditInventoryModal({ item, onClose }) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold">Edit Inventory Item</h3>
+          <h3 className="text-xl font-bold text-brand">Edit Inventory Item</h3>
           <button
             onClick={onClose}
             className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
@@ -121,7 +121,7 @@ export default function EditInventoryModal({ item, onClose }) {
                   name="company_id"
                   required
                   defaultValue={item.company_id}
-                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
                 >
                   <option value="">Select company</option>
                   {companies.map((company) => (
@@ -139,7 +139,7 @@ export default function EditInventoryModal({ item, onClose }) {
                   name="grade"
                   required
                   defaultValue={item.grade}
-                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
                 >
                   <option value="">Select {gradeLabel.toLowerCase()}</option>
                   {gradeOptions.map((option) => (
@@ -160,7 +160,7 @@ export default function EditInventoryModal({ item, onClose }) {
                   name="measurement"
                   required
                   defaultValue={item.measurement}
-                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
                 >
                   <option value="">Select measurement</option>
                   {measurements.map((measurement) => (
@@ -180,7 +180,7 @@ export default function EditInventoryModal({ item, onClose }) {
                 name="thickness"
                 required
                 defaultValue={item.thickness}
-                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
               >
                 <option value="">Select thickness</option>
                 {thicknesses.map((thickness) => (
@@ -201,7 +201,7 @@ export default function EditInventoryModal({ item, onClose }) {
                 required
                 min="0"
                 defaultValue={item.quantity}
-                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function EditInventoryModal({ item, onClose }) {
               name="notes"
               rows={2}
               defaultValue={item.notes || ''}
-              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"
+              className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand resize-none"
             />
           </div>
 
@@ -225,7 +225,7 @@ export default function EditInventoryModal({ item, onClose }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors disabled:opacity-50"
+              className="flex-1 bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors disabled:opacity-50"
             >
               {isSubmitting ? 'Updating...' : 'Update Item'}
             </button>

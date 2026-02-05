@@ -106,7 +106,7 @@ export default function SitesList({ customerId }) {
         <p className="text-neutral-600 mb-4">No sites found for this customer</p>
         <Link
           href={`/dashboard/sites/new?customer=${customerId}`}
-          className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+          className="inline-flex items-center gap-2 bg-brand text-white px-5 py-2.5 rounded-xl font-medium hover:bg-brand-dark transition-colors"
         >
           Add First Site
         </Link>
@@ -131,7 +131,7 @@ export default function SitesList({ customerId }) {
             <select
               value={dateFilter}
               onChange={(e) => handleFilterChange(e.target.value)}
-              className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
             >
               <option value="all">All Time</option>
               <option value="today">Today</option>
@@ -165,7 +165,7 @@ export default function SitesList({ customerId }) {
             <select
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
             >
               <option value="">Choose year</option>
               {availableYears.map(year => (
@@ -183,7 +183,7 @@ export default function SitesList({ customerId }) {
               type="month"
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
-              className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+              className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
             />
           </div>
         )}
@@ -197,7 +197,7 @@ export default function SitesList({ customerId }) {
                 type="date"
                 value={customStartDate}
                 onChange={(e) => setCustomStartDate(e.target.value)}
-                className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
             <div className="flex items-center gap-2">
@@ -206,7 +206,7 @@ export default function SitesList({ customerId }) {
                 type="date"
                 value={customEndDate}
                 onChange={(e) => setCustomEndDate(e.target.value)}
-                className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                className="px-4 py-2 bg-white border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
           </div>

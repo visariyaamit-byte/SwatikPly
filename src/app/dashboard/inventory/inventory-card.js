@@ -32,7 +32,7 @@ export default function InventoryCard({
   return (
     <div className="bg-white border border-neutral-200 rounded-2xl p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold">{title}</h2>
+        <h2 className="text-xl font-bold text-brand">{title}</h2>
         
         <div className="flex items-center gap-2">
           <label className="text-sm font-medium text-neutral-600">
@@ -41,7 +41,7 @@ export default function InventoryCard({
           <select
             value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
-            className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900"
+            className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
           >
             {options.map(option => {
               const displayName = productType === 'Plywood' 

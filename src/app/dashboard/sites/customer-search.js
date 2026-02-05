@@ -57,7 +57,7 @@ export default function CustomerSearch({ onSelectCustomer }) {
             }
           }}
           placeholder="Search customer by name, phone, or email..."
-          className="w-full pl-12 pr-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+          className="w-full pl-12 pr-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
         />
       </div>
 

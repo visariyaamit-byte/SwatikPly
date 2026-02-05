@@ -1,10 +1,12 @@
 import { getChallans } from '@/app/actions/challans'
+import { getUserRole } from '@/app/actions/auth'
 import Link from 'next/link'
 import { Plus, FileText } from 'lucide-react'
 import ChallanList from './challan-list'
 
 export default async function ChallansPage() {
   const challans = await getChallans()
+  const userRole = await getUserRole()
 
   return (
     <div>
@@ -12,13 +14,13 @@ export default async function ChallansPage() {
       <div className="mb-8">
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Delivery Challans</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-brand">Delivery Challans</h1>
             <p className="text-neutral-600 mt-1">Create and manage delivery challans</p>
           </div>
 
           <Link
             href="/dashboard/challans/create"
-            className="flex items-center gap-2 px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded-xl font-medium transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-brand hover:bg-brand-dark text-white rounded-xl font-medium transition-colors"
           >
             <Plus size={20} />
             New Challan
@@ -35,14 +37,14 @@ export default async function ChallansPage() {
           </p>
           <Link
             href="/dashboard/challans/create"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded-xl font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand hover:bg-brand-dark text-white rounded-xl font-medium transition-colors"
           >
             <Plus size={20} />
             Create First Challan
           </Link>
         </div>
       ) : (
-        <ChallanList challans={challans} />
+        <ChallanList challans={challans} userRole={userRole} />
       )}
     </div>
   )

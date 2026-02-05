@@ -33,7 +33,7 @@ export default function AddLaminateForm({ siteId }) {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-xl font-medium hover:bg-neutral-800 transition-colors"
+        className="flex items-center gap-2 bg-brand text-white px-5 py-2.5 rounded-xl font-medium hover:bg-brand-dark transition-colors"
       >
         <Plus size={20} />
         Add Laminate Entry
@@ -57,7 +57,7 @@ export default function AddLaminateForm({ siteId }) {
               id="room"
               name="room"
               required
-              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
               placeholder="e.g., Living Room, Bedroom 1"
             />
           </div>
@@ -72,7 +72,7 @@ export default function AddLaminateForm({ siteId }) {
               id="model_name"
               name="model_name"
               required
-              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
               placeholder="e.g., Premium Oak"
             />
           </div>
@@ -88,7 +88,7 @@ export default function AddLaminateForm({ siteId }) {
               name="date"
               required
               defaultValue={new Date().toISOString().split('T')[0]}
-              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+              className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
             />
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function AddLaminateForm({ siteId }) {
             name="description"
             required
             rows={2}
-            className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"
+            className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand resize-none"
             placeholder="Describe the laminate details"
           />
         </div>
@@ -117,7 +117,7 @@ export default function AddLaminateForm({ siteId }) {
             id="notes"
             name="notes"
             rows={2}
-            className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black resize-none"
+            className="w-full px-4 py-3 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand resize-none"
             placeholder="Additional notes"
           />
         </div>
@@ -127,7 +127,7 @@ export default function AddLaminateForm({ siteId }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 transition-colors disabled:opacity-50"
+            className="flex-1 bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark transition-colors disabled:opacity-50"
           >
             {isSubmitting ? 'Adding...' : 'Add Entry'}
           </button>

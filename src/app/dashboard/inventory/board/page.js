@@ -27,7 +27,7 @@ export default async function BoardInventoryPage() {
           Back to Inventory
         </Link>
         
-        <h1 className="text-3xl font-bold tracking-tight">Board Inventory</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">Board Inventory</h1>
         <p className="text-neutral-600 mt-1">Manage board stock by grade</p>
       </div>
 

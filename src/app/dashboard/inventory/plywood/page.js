@@ -42,7 +42,7 @@ export default async function PlywoodInventoryPage() {
         
         <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Plywood Inventory</h1>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-brand">Plywood Inventory</h1>
             <p className="text-neutral-600 mt-1">Manage plywood stock by company</p>
           </div>
 

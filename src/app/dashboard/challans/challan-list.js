@@ -5,7 +5,7 @@ import { Eye, Trash2 } from 'lucide-react'
 import { deleteChallan } from '@/app/actions/challans'
 import { useRouter } from 'next/navigation'
 
-export default function ChallanList({ challans }) {
+export default function ChallanList({ challans, userRole }) {
   const router = useRouter()
 
   async function handleDelete(id, challanNumber) {
@@ -58,13 +58,15 @@ export default function ChallanList({ challans }) {
                     >
                       <Eye size={18} />
                     </Link>
-                    <button
-                      onClick={() => handleDelete(challan.id, challan.challan_number)}
-                      className="p-2 hover:bg-red-100 text-red-600 rounded-lg transition-colors"
-                      title="Delete"
-                    >
-                      <Trash2 size={18} />
-                    </button>
+                    {userRole === 'manager' && (
+                      <button
+                        onClick={() => handleDelete(challan.id, challan.challan_number)}
+                        className="p-2 hover:bg-red-100 text-red-600 rounded-lg transition-colors"
+                        title="Delete"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    )}
                   </div>
                 </td>
               </tr>

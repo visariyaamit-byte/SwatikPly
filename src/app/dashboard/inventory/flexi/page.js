@@ -27,7 +27,7 @@ export default async function FlexiInventoryPage() {
           Back to Inventory
         </Link>
         
-        <h1 className="text-3xl font-bold tracking-tight">Flexi Inventory</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-brand">Flexi Inventory</h1>
         <p className="text-neutral-600 mt-1">Manage flexi stock by type</p>
       </div>
 
