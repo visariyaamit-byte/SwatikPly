@@ -144,7 +144,7 @@ export async function getProductSales(inventoryId, startDate = null, endDate = n
       quantity,
       rate,
       amount,
-      challan:challan_id (
+      challan:challan_id!inner (
         challan_number,
         date,
         customer_name
@@ -219,7 +219,7 @@ export async function getSalesByType(productType, startDate = null, endDate = nu
       quantity,
       rate,
       amount,
-      challan:challan_id (
+      challan:challan_id!inner (
         challan_number,
         date,
         customer_name
@@ -227,6 +227,16 @@ export async function getSalesByType(productType, startDate = null, endDate = nu
     `)
     .in('inventory_id', inventoryIds)
     .order('challan(date)', { ascending: false })
+
+  // Apply date filters if provided
+  if (startDate) {
+    query = query.gte('challan.date', startDate)
+  }
+  if (endDate) {
+    query = query.lte('challan.date', endDate)
+  }
+  
+  const { data, error } = await query
   
   // Filter by challan IDs if date range was specified
   if (challanIds) {
@@ -292,7 +302,7 @@ export async function getSalesByCompany(companyId, startDate = null, endDate = n
       quantity,
       rate,
       amount,
-      challan:challan_id (
+      challan:challan_id!inner (
         challan_number,
         date,
         customer_name
@@ -300,6 +310,16 @@ export async function getSalesByCompany(companyId, startDate = null, endDate = n
     `)
     .in('inventory_id', inventoryIds)
     .order('challan(date)', { ascending: false })
+
+  // Apply date filters if provided
+  if (startDate) {
+    query = query.gte('challan.date', startDate)
+  }
+  if (endDate) {
+    query = query.lte('challan.date', endDate)
+  }
+  
+  const { data, error } = await query
   
   if (challanIds) {
     query = query.in('challan_id', challanIds)
@@ -364,7 +384,7 @@ export async function getSalesByBoardGrade(grade, startDate = null, endDate = nu
       quantity,
       rate,
       amount,
-      challan:challan_id (
+      challan:challan_id!inner (
         challan_number,
         date,
         customer_name
@@ -372,6 +392,16 @@ export async function getSalesByBoardGrade(grade, startDate = null, endDate = nu
     `)
     .in('inventory_id', inventoryIds)
     .order('challan(date)', { ascending: false })
+
+  // Apply date filters if provided
+  if (startDate) {
+    query = query.gte('challan.date', startDate)
+  }
+  if (endDate) {
+    query = query.lte('challan.date', endDate)
+  }
+  
+  const { data, error } = await query
   
   if (challanIds) {
     query = query.in('challan_id', challanIds)
@@ -388,4 +418,3 @@ export async function getSalesByBoardGrade(grade, startDate = null, endDate = nu
   
   return { data, totalQuantity, totalRevenue, error: null }
 }
-

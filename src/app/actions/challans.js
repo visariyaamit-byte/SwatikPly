@@ -4,23 +4,38 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
 // Get all challans
-export async function getChallans() {
+// Get all challans with pagination and search
+export async function getChallans({ page = 1, limit = 10, query = '' } = {}) {
   const supabase = await createClient()
 
-  const { data, error } = await supabase
+  const from = (page - 1) * limit
+  const to = from + limit - 1
+
+  let dbQuery = supabase
     .from('challans')
     .select(`
       *,
       challan_items(*)
-    `)
+    `, { count: 'exact' })
     .order('created_at', { ascending: false })
+    .range(from, to)
+
+  if (query) {
+    dbQuery = dbQuery.or(`challan_number.ilike.%${query}%,customer_name.ilike.%${query}%`)
+  }
+
+  const { data, error, count } = await dbQuery
 
   if (error) {
     console.error('Error fetching challans:', error)
-    return []
+    return { data: [], totalPages: 0, totalCount: 0 }
   }
 
-  return data
+  return {
+    data: data || [],
+    totalPages: Math.ceil((count || 0) / limit),
+    totalCount: count || 0
+  }
 }
 
 // Get single challan
