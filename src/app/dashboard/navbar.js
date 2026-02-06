@@ -33,7 +33,7 @@ export default function Navbar() {
               <div className="relative w-10 h-10 rounded-full border-2 border-brand overflow-hidden bg-white">
                 <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-brand">Swastik Ply</span>
+              <span className="text-xl font-bold tracking-tight">Swastika Ply</span>
             </div>
           </div>
 

@@ -37,11 +37,11 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="w-full max-w-md px-6">
         <div className="text-center mb-10">
-          <div className="w-20 h-20 mx-auto mb-6 rounded-full border-2 border-black overflow-hidden bg-white">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-full border-2 border-brand overflow-hidden bg-white">
             <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-3xl font-bold tracking-tight mb-2">
-            Swastik Plywood
+            Swastika Plywood
           </h1>
           <p className="text-neutral-600 text-sm">
             Store Management System
@@ -58,7 +58,7 @@ export default function LoginPage() {
                 type="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
                 placeholder="manager@example.com"
               />
             </div>
@@ -71,7 +71,7 @@ export default function LoginPage() {
                 type="password"
                 name="password"
                 required
-                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+                className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
                 placeholder="••••••••"
               />
             </div>
@@ -85,7 +85,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-black text-white py-3 rounded-xl font-medium hover:bg-neutral-800 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-brand text-white py-3 rounded-xl font-medium hover:bg-brand-dark active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
