@@ -136,10 +136,10 @@ export default function CreateChallanForm({ nextChallanNumber, inventory, custom
   }
 
   // Calculate totals
-  const subtotal = items.reduce((sum, item) => sum + (item.amount || 0), 0)
-  const cgstAmount = (subtotal * cgstPercentage) / 100
-  const sgstAmount = (subtotal * sgstPercentage) / 100
-  const total = subtotal + cgstAmount + sgstAmount + transportCharges + labourCharges
+  const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.amount) || 0), 0)
+  const cgstAmount = (subtotal * (parseFloat(cgstPercentage) || 0)) / 100
+  const sgstAmount = (subtotal * (parseFloat(sgstPercentage) || 0)) / 100
+  const total = subtotal + cgstAmount + sgstAmount + (parseFloat(transportCharges) || 0) + (parseFloat(labourCharges) || 0)
 
   // Submit form
   async function handleSubmit(e) {
@@ -675,7 +675,7 @@ export default function CreateChallanForm({ nextChallanNumber, inventory, custom
                     Transport Charges
                   </td>
                   <td className="px-4 py-2 text-right">
-                    ₹{transportCharges.toFixed(2)}
+                    ₹{(parseFloat(transportCharges) || 0).toFixed(2)}
                   </td>
                   <td></td>
                 </tr>
@@ -698,7 +698,7 @@ export default function CreateChallanForm({ nextChallanNumber, inventory, custom
                     Labour Charges
                   </td>
                   <td className="px-4 py-2 text-right">
-                    ₹{labourCharges.toFixed(2)}
+                    ₹{(parseFloat(labourCharges) || 0).toFixed(2)}
                   </td>
                   <td></td>
                 </tr>
