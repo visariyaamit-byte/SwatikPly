@@ -189,7 +189,7 @@ export default function AddInventoryForm({ companies, boardCompanies }) {
             required
             min="0"
             className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand"
-            placeholder="0"
+            placeholder=""
           />
         </div>
       </div>

@@ -30,8 +30,8 @@ export default function EditChallanForm({ challan, inventory, customers, initial
       inventory_id: item.inventory_id,
       description: item.description,
       quantity: item.quantity,
-      rate: item.rate || 0,
-      amount: item.amount || 0,
+      rate: item.rate || '',
+      amount: item.amount || '',
       maxQuantity: item.inventory_id
         ? (() => {
             const inv = inventory.find(i => i.id === item.inventory_id)
@@ -42,10 +42,10 @@ export default function EditChallanForm({ challan, inventory, customers, initial
     }))
   )
 
-  const [cgstPercentage, setCgstPercentage] = useState(challan.cgst_percentage || 0)
-  const [sgstPercentage, setSgstPercentage] = useState(challan.sgst_percentage || 0)
-  const [transportCharges, setTransportCharges] = useState(challan.transport_charges || 0)
-  const [labourCharges, setLabourCharges] = useState(challan.labour_charges || 0)
+  const [cgstPercentage, setCgstPercentage] = useState(challan.cgst_percentage || '')
+  const [sgstPercentage, setSgstPercentage] = useState(challan.sgst_percentage || '')
+  const [transportCharges, setTransportCharges] = useState(challan.transport_charges || '')
+  const [labourCharges, setLabourCharges] = useState(challan.labour_charges || '')
 
   // Handle Customer Selection
   async function handleCustomerChange(e) {
@@ -462,7 +462,7 @@ export default function EditChallanForm({ challan, inventory, customers, initial
                     value={cgstPercentage}
                     onChange={(e) => setCgstPercentage(parseFloat(e.target.value) || 0)}
                     className="w-16 px-2 py-1 border border-neutral-300 rounded text-sm text-center focus:outline-none focus:ring-1 focus:ring-brand"
-                    placeholder="0"
+                    placeholder=""
                   />
                 </div>
                 <span>₹{cgstAmount.toFixed(2)}</span>
@@ -478,7 +478,7 @@ export default function EditChallanForm({ challan, inventory, customers, initial
                     value={sgstPercentage}
                     onChange={(e) => setSgstPercentage(parseFloat(e.target.value) || 0)}
                     className="w-16 px-2 py-1 border border-neutral-300 rounded text-sm text-center focus:outline-none focus:ring-1 focus:ring-brand"
-                    placeholder="0"
+                    placeholder=""
                   />
                 </div>
                 <span>₹{sgstAmount.toFixed(2)}</span>
@@ -495,7 +495,7 @@ export default function EditChallanForm({ challan, inventory, customers, initial
                     value={transportCharges}
                     onChange={(e) => setTransportCharges(parseFloat(e.target.value) || 0)}
                     className="w-24 px-2 py-1 border border-neutral-300 rounded text-sm text-right focus:outline-none focus:ring-1 focus:ring-brand"
-                    placeholder="0.00"
+                    placeholder=""
                   />
                 </div>
               </div>
@@ -511,7 +511,7 @@ export default function EditChallanForm({ challan, inventory, customers, initial
                     value={labourCharges}
                     onChange={(e) => setLabourCharges(parseFloat(e.target.value) || 0)}
                     className="w-24 px-2 py-1 border border-neutral-300 rounded text-sm text-right focus:outline-none focus:ring-1 focus:ring-brand"
-                    placeholder="0.00"
+                    placeholder=""
                   />
                 </div>
               </div>
@@ -613,7 +613,7 @@ export default function EditChallanForm({ challan, inventory, customers, initial
                           value={cgstPercentage}
                           onChange={(e) => setCgstPercentage(parseFloat(e.target.value) || 0)}
                           className="w-20 px-2 py-1 border border-neutral-300 rounded text-sm text-center"
-                          placeholder="0"
+                          placeholder=""
                         />
                       </div>
                     </td>
@@ -636,7 +636,7 @@ export default function EditChallanForm({ challan, inventory, customers, initial
                           value={sgstPercentage}
                           onChange={(e) => setSgstPercentage(parseFloat(e.target.value) || 0)}
                           className="w-20 px-2 py-1 border border-neutral-300 rounded text-sm text-center"
-                          placeholder="0"
+                          placeholder=""
                         />
                       </div>
                     </td>
@@ -659,7 +659,7 @@ export default function EditChallanForm({ challan, inventory, customers, initial
                           value={transportCharges}
                           onChange={(e) => setTransportCharges(parseFloat(e.target.value) || 0)}
                           className="w-32 px-2 py-1 border border-neutral-300 rounded text-sm text-right"
-                          placeholder="0.00"
+                          placeholder=""
                         />
                       </div>
                     </td>
@@ -682,7 +682,7 @@ export default function EditChallanForm({ challan, inventory, customers, initial
                           value={labourCharges}
                           onChange={(e) => setLabourCharges(parseFloat(e.target.value) || 0)}
                           className="w-32 px-2 py-1 border border-neutral-300 rounded text-sm text-right"
-                          placeholder="0.00"
+                          placeholder=""
                         />
                       </div>
                     </td>
