@@ -423,7 +423,7 @@ export default function CreateChallanForm({ nextChallanNumber, inventory, custom
                   <div className="flex justify-between items-center pt-3 border-t border-neutral-200">
                     <div>
                       <label className="block text-xs font-semibold text-neutral-500 uppercase">Amount</label>
-                      <span className="text-lg font-bold text-neutral-900">₹{item.amount.toFixed(2)}</span>
+                      <span className="text-lg font-bold text-neutral-900">₹{Number(item.amount || 0).toFixed(2)}</span>
                     </div>
                     <button
                       type="button"
@@ -586,7 +586,7 @@ export default function CreateChallanForm({ nextChallanNumber, inventory, custom
                         />
                       </td>
                       <td className="px-4 py-3 text-right font-semibold">
-                        ₹{item.amount.toFixed(2)}
+                        ₹{Number(item.amount || 0).toFixed(2)}
                       </td>
                       <td className="px-4 py-3">
                         <button

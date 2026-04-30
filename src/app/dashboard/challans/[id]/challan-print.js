@@ -193,10 +193,10 @@ function ChallanTemplate({ challan }) {
                 <td className="border border-neutral-300 px-2 py-1.5">{item.description}</td>
                 <td className="border border-neutral-300 px-2 py-1.5 text-center">{item.quantity}</td>
                 <td className="border border-neutral-300 px-2 py-1.5 text-right">
-                  {item.rate ? `₹${item.rate.toFixed(2)}` : ''}
+                  {item.rate ? `₹${Number(item.rate).toFixed(2)}` : ''}
                 </td>
                 <td className="border border-neutral-300 px-2 py-1.5 text-right">
-                  {item.amount ? `₹${item.amount.toFixed(2)}` : ''}
+                  {item.amount ? `₹${Number(item.amount).toFixed(2)}` : ''}
                 </td>
               </tr>
             ))}
