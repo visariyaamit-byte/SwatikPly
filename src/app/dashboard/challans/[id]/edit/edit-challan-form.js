@@ -105,8 +105,8 @@ export default function EditChallanForm({ challan, inventory, customers, initial
       inventory_id: inventoryItem.id,
       description,
       quantity: 1,
-      rate: 0,
-      amount: 0,
+      rate: '',
+      amount: '',
       maxQuantity: inventoryItem.quantity
     }
 
@@ -120,8 +120,8 @@ export default function EditChallanForm({ challan, inventory, customers, initial
       inventory_id: null,
       description: '',
       quantity: 1,
-      rate: 0,
-      amount: 0,
+      rate: '',
+      amount: '',
       maxQuantity: null
     }
     setItems([...items, newItem])

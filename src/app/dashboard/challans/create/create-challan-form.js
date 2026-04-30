@@ -90,8 +90,8 @@ export default function CreateChallanForm({ nextChallanNumber, inventory, custom
       inventory_id: inventoryItem.id,
       description,
       quantity: 1,
-      rate: 0,
-      amount: 0,
+      rate: '',
+      amount: '',
       maxQuantity: inventoryItem.quantity
     }
 
@@ -105,8 +105,8 @@ export default function CreateChallanForm({ nextChallanNumber, inventory, custom
       inventory_id: null,
       description: '',
       quantity: 1,
-      rate: 0,
-      amount: 0,
+      rate: '',
+      amount: '',
       maxQuantity: null
     }
 
