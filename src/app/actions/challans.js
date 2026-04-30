@@ -140,8 +140,8 @@ export async function createChallan(formData) {
           challan_id: challan.id,
           description: item.description,
           quantity: item.quantity,
-          rate: item.rate,
-          amount: item.amount,
+          rate: parseFloat(item.rate) || 0,
+          amount: parseFloat(item.amount) || 0,
           inventory_id: item.inventory_id || null,
           sort_order: i
         }])
@@ -282,8 +282,8 @@ export async function updateChallan(challanId, formData) {
           challan_id: challanId,
           description: item.description,
           quantity: item.quantity,
-          rate: item.rate,
-          amount: item.amount,
+          rate: parseFloat(item.rate) || 0,
+          amount: parseFloat(item.amount) || 0,
           inventory_id: item.inventory_id || null,
           sort_order: i
         }])
