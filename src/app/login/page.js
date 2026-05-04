@@ -41,7 +41,7 @@ export default function LoginPage() {
             <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-3xl font-bold tracking-tight mb-2">
-            Swastika Plywood
+            Sastika Ply and Laminates
           </h1>
           <p className="text-neutral-600 text-sm">
             Store Management System
