@@ -27,7 +27,7 @@ export default function DownloadLedgerButton({ customer, challans, payments, tot
       // Header
       pdf.setFontSize(18)
       pdf.setFont('helvetica', 'bold')
-      pdf.text('Sastika Ply and Laminates', margin, y)
+      pdf.text('Swastika Ply & Laminates', margin, y)
       y += 8
 
       pdf.setFontSize(12)

@@ -131,7 +131,7 @@ function ChallanTemplate({ challan }) {
         {/* Header */}
         <div className="text-center mb-4">
           <h1 className="text-lg font-bold text-red-800 mb-1">
-            Sastika Ply and Laminates
+            Swastika Ply & Laminates
           </h1>
           <p className="text-[10px] mb-1 leading-tight">
             EXCLUSIVE SHOWROOM OF DESIGNER LAMINATES, VENEERS, WALLPAPERS
@@ -275,7 +275,7 @@ function ChallanTemplate({ challan }) {
             </p>
           </div>
           <div className="text-right">
-            <p className="font-semibold">For Sastika Ply and</p>
+            <p className="font-semibold">For Swastika Ply &</p>
             <p className="font-semibold">Laminates</p>
           </div>
         </div>

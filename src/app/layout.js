@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Sastika Ply and Laminates",
+  title: "Swastika Ply & Laminates",
   description: "Store Management System",
   icons: {
     icon: '/logo.jpg',

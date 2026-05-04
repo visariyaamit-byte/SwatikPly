@@ -20,7 +20,7 @@ export default async function DashboardLayout({ children }) {
                 <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
               </div>
               <div>
-                <h1 className="text-xl font-bold tracking-tight text-black">Sastika Ply and Laminates</h1>
+                <h1 className="text-xl font-bold tracking-tight text-black">Swastika Ply & Laminates</h1>
             <p className="text-xs text-neutral-600 mt-0.5">
               {user.email} • <span className="uppercase font-medium text-black">{role}</span>
             </p>
